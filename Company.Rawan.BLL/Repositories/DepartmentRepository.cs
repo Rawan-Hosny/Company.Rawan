@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace Company.Rawan.BLL.Repositories
 {
-    internal class DepartmentReositroy : IDepartmentRepository
+    public class DepartmentRepository : IDepartmentRepository
     {
         private CompanyDbContext _context;
 
-        public DepartmentReositroy()
+        //Ask CLR to Create Object From This Class
+        public DepartmentRepository(CompanyDbContext context )
         {
-            _context = new CompanyDbContext();
+            _context = context;
         }
 
         public IEnumerable<Department> GetAll()
