@@ -3,6 +3,7 @@ using Company.Rawan.BLL.Repositories;
 using Company.Rawan.DAL.Models;
 using Company.Rawan.PL.DTOS;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace Company.Rawan.PL.Controllers
 {
@@ -48,5 +49,29 @@ namespace Company.Rawan.PL.Controllers
 
             return View(model);
         }
+   public IActionResult Edit(int id)
+        {
+            var department = _departmentRepository.Get(id);
+            if (department == null)
+            {
+                return NotFound();
+            }
+            var model = new CreateDepartmentDto()
+            {
+                Code = department.Code,
+                Name = department.Name,
+                CreateAt = department.CreateAt
+            };
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult Details(int? id)
+        {
+            if(id is null)return BadRequest("Invalid Id");
+            var department = _departmentRepository.Get(id.Value);
+            if(department is null) return NotFound(new {StatusCode=400,Message="$Department With id :{id} is not found"});
+            return View(department);
+        }
+
     }
 }
