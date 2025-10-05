@@ -15,6 +15,8 @@ namespace Company.Rawan.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();// Register Built_in MVC Services
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddDbContext<CompanyDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
