@@ -51,21 +51,21 @@ namespace Company.Rawan.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? id,string ViewName="Details")
         {
             if (id is null) return BadRequest("Invalid Id");
             var department = _departmentRepository.Get(id.Value);
             if (department is null) return NotFound(new { StatusCode = 400, Message = "$Department With id :{id} is not found" });
-            return View(department);
+            return View(ViewName,department);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if (id is null) return BadRequest("Invalid Id");
-            var department = _departmentRepository.Get(id.Value);
-            if (department is null) return NotFound(new { StatusCode = 400, Message = "$Department With id :{id} is not found" });
-            return View(department);
+            //if (id is null) return BadRequest("Invalid Id");
+            //var department = _departmentRepository.Get(id.Value);
+            //if (department is null) return NotFound(new { StatusCode = 400, Message = "$Department With id :{id} is not found" });
+            return Details(id,"Edit");
 
         }
 
@@ -87,6 +87,26 @@ namespace Company.Rawan.PL.Controllers
             }
             return View(model);
 
+        }
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            //if (id is null) return BadRequest("Invalid Id");
+            //var department = _departmentRepository.Get(id.Value);
+            //if (department is null) return NotFound(new { StatusCode = 400, Message = "$Department With id :{id} is not found" });
+            return Details(id,"Delete");
+        }
+        [HttpPost]
+        public IActionResult Delete(Department model)
+        {
+            var department = _departmentRepository.Get(model.Id);
+            if (department is null) return NotFound(new { StatusCode = 400, Message = "$Department With id :{model.Id} is not found" });
+            var Count = _departmentRepository.Delete(department);
+            if (Count > 0)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
         }
     }
 }
