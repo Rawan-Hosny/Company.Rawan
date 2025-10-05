@@ -26,6 +26,8 @@ namespace Company.Rawan.DAL.Data.Contexts
        //     optionsBuilder.UseSqlServer("Server=.;Database=CompanyDB;Trusted_Connection=True;TrustServerCertificate = True");
        // }
         public DbSet<Department> Departments { get; set; }
-       
+
+        public DbSet<Employee> Employees { get; set; }
+
     }
 }
