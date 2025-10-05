@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Company.Rawan.BLL.Interfaces
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository: IGenericRepository<Employee>
     {
-        IEnumerable<Employee> GetAll();
-        Employee? Get(int id);
-        int Add(Employee employee);
-        int Update(Employee employee);
-        int Delete(Employee employee);
+        //IEnumerable<Employee> GetAll();
+        //Employee? Get(int id);
+        //int Add(Employee employee);
+        //int Update(Employee employee);
+        //int Delete(Employee employee);
     }
 }
