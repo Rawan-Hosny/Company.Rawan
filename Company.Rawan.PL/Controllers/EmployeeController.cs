@@ -91,7 +91,6 @@ namespace Company.Rawan.PL.Controllers
                     employee.IsDeleted = model.IsDeleted;
                     employee.HiringDate = model.HiringDate;
                     employee.CreateAt = model.CreateAt;
-
                     var Count = _employeeRepository.Update(employee);
                     if (Count > 0)
                     {
@@ -100,7 +99,7 @@ namespace Company.Rawan.PL.Controllers
                 }
                 return View(model);
 
-            }
+        }
             [HttpGet]
             public IActionResult Delete(int? id)
             {
